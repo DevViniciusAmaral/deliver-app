@@ -1,14 +1,17 @@
 import React from "react";
+import { Text } from "react-native";
 import { stylesheet } from "./styles";
-import { Text, View } from "react-native";
 import { useStyles } from "react-native-unistyles";
+
+// COMPONENTS
+import { Layout } from "@components/layout";
 
 export const Home = () => {
   const { styles } = useStyles(stylesheet);
 
   return (
-    <View style={styles.container}>
+    <Layout>
       <Text style={styles.text}>Hello Word!</Text>
-    </View>
+    </Layout>
   );
 };
