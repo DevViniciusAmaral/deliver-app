@@ -1,12 +1,11 @@
 import { createStyleSheet } from "react-native-unistyles";
 
 export const stylesheet = createStyleSheet((theme) => ({
-  container: {
+  container: (paddingTop: number) => ({
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    paddingTop,
     backgroundColor: theme.colors.primary.main,
-  },
+  }),
 
   content: {
     flex: 1,

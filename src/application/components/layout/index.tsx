@@ -9,10 +9,12 @@ import {
   ScrollView,
   ScrollViewProps,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface LayoutProps extends ScrollViewProps {
   header?: React.ReactNode;
   footer?: React.ReactNode;
+  enablePaddingTop?: boolean;
   containerStyle?: StyleProp<ViewStyle>;
 }
 
@@ -23,13 +25,19 @@ export const Layout = ({
   children,
   scrollEnabled,
   containerStyle,
+  enablePaddingTop,
   ...rest
 }: LayoutProps) => {
   const { styles, theme } = useStyles(stylesheet);
 
+  const { top } = useSafeAreaInsets();
+  const paddingTop = enablePaddingTop ? top : 0;
+
   return (
-    <View style={containerStyle}>
+    <View style={[styles.container(paddingTop), containerStyle]}>
       <StatusBar style="dark" backgroundColor={theme.colors.primary.main} />
+
+      {header && <>{header}</>}
 
       {scrollEnabled ? (
         <ScrollView style={style} {...rest}>
@@ -40,6 +48,8 @@ export const Layout = ({
           {children}
         </View>
       )}
+
+      {footer && <>{footer}</>}
     </View>
   );
 };
