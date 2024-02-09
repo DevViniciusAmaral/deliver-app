@@ -30,7 +30,7 @@ export const Home = () => {
 
       <FlatList
         contentContainerStyle={{ gap: 16, paddingBottom: 16 }}
-        data={[...products[0].data, ...products[0].data]}
+        data={products[0].data}
         keyExtractor={({ id }) => id}
         renderItem={({ item }) => (
           <View style={styles.productCard}>
