@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import { Text, View } from "react-native";
 import { stylesheet } from "./styles";
+import React, { useState } from "react";
+import { FlatList, Image, Text, View } from "react-native";
 import { useStyles } from "react-native-unistyles";
+
+import { products } from "src/infrastructure/database";
 
 // COMPONENTS
 import { Layout } from "@components/layout";
@@ -25,6 +27,22 @@ export const Home = () => {
           onChangeText={setSearchValue}
         />
       </View>
+
+      <FlatList
+        contentContainerStyle={{ gap: 16, paddingBottom: 16 }}
+        data={[...products[0].data, ...products[0].data]}
+        keyExtractor={({ id }) => id}
+        renderItem={({ item }) => (
+          <View style={styles.productCard}>
+            <Image source={item.photo} style={styles.image} />
+
+            <View style={{ flex: 1 }}>
+              <Text style={styles.productLabel}>{item.name}</Text>
+              <Text style={styles.productDescription}>{item.description}</Text>
+            </View>
+          </View>
+        )}
+      />
     </Layout>
   );
 };
